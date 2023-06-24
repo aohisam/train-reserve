@@ -13,7 +13,14 @@ return new class extends Migration
     {
         Schema::create('routes', function (Blueprint $table) {
             $table->id();
-            $table->json('create-json');
+            $table->string('departure_station');
+            $table->string('arrival_station');
+            $table->time('departure_time');
+            $table->time('arrival_time');
+            $table->string('duration');
+            $table->integer('adult_fare');
+            $table->integer('child_fare');
+            $table->string('day_of_week');
             $table->timestamps();
         });
     }
