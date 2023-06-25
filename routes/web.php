@@ -19,4 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/add-routes', [RouteController::class, 'addRoutes']);
+//運行情報作成用の下記コードは、運行情報作成に伴い下記コメントアウト
+// Route::get('/add-routes', [RouteController::class, 'addRoutes']);
+
+
