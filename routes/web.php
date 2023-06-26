@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::get('/users', function () {
+    return view('users.index');
 });
+Route::post('/users', [RegisterController::class, 'store']);
 
-Route::resource('login', LoginController::class);
-Route::resource('register', RegisterController::class);
+Route::resource('users/login', LoginController::class);
+Route::resource('users/register', RegisterController::class);

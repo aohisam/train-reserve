@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -11,7 +13,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        //
+        return view('users.register');
     }
 
     /**
@@ -27,7 +29,17 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'register-name' => 'required|string|max:255',
+            'register-email' => 'required|string|email|unique:users,email',
+            'register-password' => 'required|string|min:8',
+        ]);
+        $user = new User;
+        $user->name = $request->input('register-name');
+        $user->email = $request->input('register-email');
+        $user->password = Hash::make($request->input('register-password'));
+        $user->save();
+        return redirect('/users');
     }
 
     /**
