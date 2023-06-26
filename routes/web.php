@@ -19,6 +19,8 @@ Route::get('/users', function () {
     return view('users.index');
 });
 Route::post('/users', [RegisterController::class, 'store']);
+Route::post('/users', [LoginController::class, 'store']);
+
 
 Route::resource('users/login', LoginController::class);
 Route::resource('users/register', RegisterController::class);
