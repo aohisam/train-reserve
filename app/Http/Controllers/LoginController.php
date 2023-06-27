@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -11,7 +12,7 @@ class LoginController extends Controller
      */
     public function index()
     {
-        //
+        return view('users.login');
     }
 
     /**
@@ -27,7 +28,15 @@ class LoginController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            return redirect('/users');
+        } else {
+            return redirect()->back()->withErrors([
+                'email' => 'メールまたはパスワードが正しくありません',
+            ]);
+        }
     }
 
     /**
@@ -59,6 +68,7 @@ class LoginController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Auth::logout();
+        return redirect('/login');
     }
 }
