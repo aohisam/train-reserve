@@ -31,7 +31,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect('/users');
+            return redirect('/users/dashboard');
         } else {
             return redirect()->back()->withErrors([
                 'email' => 'メールまたはパスワードが正しくありません',
@@ -66,9 +66,14 @@ class LoginController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy()
+    {
+        //
+    }
+
+    public function logout()
     {
         Auth::logout();
-        return redirect('/login');
+        return redirect('/users');
     }
 }

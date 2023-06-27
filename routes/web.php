@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -19,8 +20,11 @@ Route::get('/users', function () {
     return view('users.index');
 });
 Route::post('/users', [RegisterController::class, 'store']);
+
 Route::post('/users', [LoginController::class, 'store']);
-
-
 Route::resource('users/login', LoginController::class);
+Route::post('users/logout', [LoginController::class, 'logout'])->name('logout');
+
 Route::resource('users/register', RegisterController::class);
+
+Route::get('users/dashboard', [DashboardController::class, 'index']);
