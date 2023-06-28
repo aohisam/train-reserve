@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SearchTrainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,4 +28,6 @@ Route::post('users/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::resource('users/register', RegisterController::class);
 
-Route::get('users/dashboard', [DashboardController::class, 'index']);
+Route::get('users/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::resource('/train', SearchTrainController::class);

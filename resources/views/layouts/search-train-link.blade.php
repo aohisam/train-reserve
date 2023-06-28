@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>ダッシュボード</title>
+    <title>新幹線検索ページリンク</title>
 </head>
 
 <body>
-    ダッシュボード
-    @include('layouts.logout')
-    @include('layouts.search-train-link')
+    <div class="search-train-link">
+        <a href="{{ route('train.index') }}">新幹線検索ページ</a>
+    </div>
 </body>
 
 </html>

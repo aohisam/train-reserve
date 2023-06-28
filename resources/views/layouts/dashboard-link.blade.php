@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>ダッシュボード</title>
+    <title>ダッシュボードリンク</title>
 </head>
 
 <body>
-    ダッシュボード
-    @include('layouts.logout')
-    @include('layouts.search-train-link')
+    <div class="dashboard-link">
+        <a href="{{ route('dashboard') }}">ダッシュボード</a>
+    </div>
 </body>
 
 </html>
