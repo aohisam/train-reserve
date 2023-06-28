@@ -9,7 +9,10 @@
 </head>
 
 <body>
-    トップページ
+    <h2>トップページ</h2>
+    <div class="login-link">
+        <a href="{{ route('login.index') }}">ログインページ</a>
+    </div>
 </body>
 
 </html>
