@@ -21,54 +21,61 @@
     @include('layouts.dashboard-link')
 
     <div class="search-train">
-        <div class="select-date-area">
-            <select name="01" class="select-date">
-                {{-- javascriptで一週間先までの optionタグを作成 --}}
-            </select>
-        </div>
+        <form action="" method="post">
+            @csrf
+            <div class="select-date-area">
+                <select name="01" class="select-date">
+                    {{-- javascriptで一週間先までの optionタグを作成 --}}
+                </select>
+            </div>
 
-        <div class="select-time-area">
-            <select name="02" class="select-hour">
-                {{-- javascriptで時間の optionタグを作成 --}}
-            </select>
-            <select name="03" class="select-minute">
-                {{-- javascriptで分の optionタグを作成 --}}
-            </select>
-            <select name="04" class="leave-or-arrival">
-                <option value="1" selected>出発</option>
-                <option value="2">到着</option>
-            </select>
-        </div>
+            <div class="select-time-area">
+                <select name="02" class="select-hour">
+                    {{-- javascriptで時間の optionタグを作成 --}}
+                </select>
+                <select name="03" class="select-minute">
+                    {{-- javascriptで分の optionタグを作成 --}}
+                </select>
+                <select name="04" class="leave-or-arrival">
+                    <option value="1" selected>出発</option>
+                    <option value="2">到着</option>
+                </select>
+            </div>
 
-        <div class="select-place-area">
-            <select name="05" class="select-leave-station">
-                {{-- PHP&javascriptで出発駅の optionタグを作成 --}}
-            </select>
-            <select name="06" class="select-leave-station">
-                {{-- PHP&javascriptで到着駅の optionタグを作成 --}}
-            </select>
-        </div>
+            <div class="select-place-area">
+                <select name="05" class="select-leave-station">
+                    {{-- PHP&javascriptで出発駅の optionタグを作成 --}}
+                </select>
+                <select name="06" class="select-arrival-station">
+                    {{-- PHP&javascriptで到着駅の optionタグを作成 --}}
+                </select>
+            </div>
 
-        <div class="adults-or-children">
-            <select name="07" class="select-adults">
-                <option value="1">おとな1名</option>
-                <option value="2">おとな2名</option>
-                <option value="3">おとな3名</option>
-                <option value="4">おとな4名</option>
-                <option value="5">おとな5名</option>
-                <option value="6">おとな6名</option>
-            </select>
-            <select name="08" class="select-children">
-                <option value="1">こども1名</option>
-                <option value="2">こども2名</option>
-                <option value="3">こども3名</option>
-                <option value="4">こども4名</option>
-                <option value="5">こども5名</option>
-                <option value="6">こども6名</option>
-            </select>
-        </div>
-
+            <div class="adults-or-children">
+                <select name="07" class="select-adults">
+                    <option value="1">おとな1名</option>
+                    <option value="2">おとな2名</option>
+                    <option value="3">おとな3名</option>
+                    <option value="4">おとな4名</option>
+                    <option value="5">おとな5名</option>
+                    <option value="6">おとな6名</option>
+                </select>
+                <select name="08" class="select-children">
+                    <option value="1">こども1名</option>
+                    <option value="2">こども2名</option>
+                    <option value="3">こども3名</option>
+                    <option value="4">こども4名</option>
+                    <option value="5">こども5名</option>
+                    <option value="6">こども6名</option>
+                </select>
+            </div>
+            <button type="submit">
+                検索
+            </button>
+        </form>
     </div>
+
+
 
     {{-- 日付取得 --}}
     <script>
@@ -150,11 +157,39 @@
         }
 
         // 現在の時刻に最も近い分をデフォルトで選択
-        if (selectMinute.options.length > 0) {
+        if (selectMinute.options.length >= 0) {
             selectMinute.options[0].selected = true;
         }
     </script>
 
+
+    {{-- Controller経由でデータベースから出発駅と到着駅の情報を取得 --}}
+    <script>
+        const depatureStationsArray = {!! json_encode($depature_stations_array) !!};
+        const uniqueDepatureStationsArray = Array.from(new Set(depatureStationsArray));
+
+        const selectLeaveStation = document.querySelector('.select-leave-station');
+
+        uniqueDepatureStationsArray.forEach(function(depatureStation) {
+            const option = document.createElement('option');
+            option.value = depatureStation;
+            option.text = depatureStation;
+            selectLeaveStation.appendChild(option);
+        });
+
+
+        const arrivalStationsArray = {!! json_encode($arrival_stations_array) !!};
+        const uniqueArrivalStationsArray = Array.from(new Set(arrivalStationsArray));
+
+        const selectArrivalStation = document.querySelector('.select-arrival-station');
+
+        uniqueArrivalStationsArray.forEach(function(arrivalStation) {
+            const option = document.createElement('option');
+            option.value = arrivalStation;
+            option.text = arrivalStation;
+            selectArrivalStation.appendChild(option);
+        });
+    </script>
 
 </body>
 

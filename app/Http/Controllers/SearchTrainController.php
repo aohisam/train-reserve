@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Routes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +14,10 @@ class SearchTrainController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            return view('train.index');
+            $routes= new Routes();
+            $depature_stations_array = $routes->pluck('departure_station')->toArray();
+            $arrival_stations_array = $routes->pluck('arrival_station')->toArray();
+            return view('train.index', compact('depature_stations_array', 'arrival_stations_array'));
         } else {
             return redirect('/');
         }
