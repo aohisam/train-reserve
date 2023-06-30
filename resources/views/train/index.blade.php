@@ -53,7 +53,8 @@
 
             <div class="adults-or-children">
                 <select name="07" class="select-adults">
-                    <option value="1">おとな1名</option>
+                    <option value="0">おとな0名</option>
+                    <option value="1" selected>おとな1名</option>
                     <option value="2">おとな2名</option>
                     <option value="3">おとな3名</option>
                     <option value="4">おとな4名</option>
@@ -61,6 +62,7 @@
                     <option value="6">おとな6名</option>
                 </select>
                 <select name="08" class="select-children">
+                    <option value="0">こども0名</option>
                     <option value="1">こども1名</option>
                     <option value="2">こども2名</option>
                     <option value="3">こども3名</option>

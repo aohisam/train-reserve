@@ -21,6 +21,12 @@
                     <p>{{ $route->arrival_time }}<span>着</span></p>
                     <form action="/train/result-fare" method="post">
                         @csrf
+                        <input type="hidden" id="departure" name="departure" value={{ $route->departure_station }}>
+                        <input type="hidden" id="arrival" name="arrival" value={{ $route->arrival_station }}>
+                        <input type="hidden" id="dayOfWeek" name="dayOfWeek" value={{ $route->day_of_week }}>
+                        <input type="hidden" id="departureTime" name="departureTime"
+                            value={{ $route->departure_time }}>
+                        <input type="hidden" id="arrivalTime" name="arrivalTime" value={{ $route->arrival_time }}>
                         <button type="submit">この経路を選択</button>
                     </form>
                 </div>
@@ -32,6 +38,8 @@
         @endif
     </div>
     @include('layouts.search-train-link')
+    @include('layouts.logout')
+    <script></script>
 </body>
 
 </html>

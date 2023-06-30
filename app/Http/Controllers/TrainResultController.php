@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Routes;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class TrainResultController extends Controller
 {
@@ -40,13 +41,32 @@ class TrainResultController extends Controller
                     ->orderByRaw("ABS(TIME_TO_SEC(arrival_time) - $timeRange) <= 3600");
             }
             $routes = $routesQuery->get();
+            Session::put("adultsNumber", $adultsNumber);
+            Session::put("childrenNumber", $childrenNumber);
             return view('train.result', compact('routes', 'leaveStation', 'arrivalStation'));
+        } else {
+            /**エラー処理を記述**/
         }
     }
 
     public function trainResultFare(Request $request)
     {
-        
-        return view('train.result-fare');
+        $departureStation = $request->input("departure");
+        $arrivalStation = $request->input("arrival");
+        $dayOfWeek = $request->input("dayOfWeek");
+        $departureTime = $request->input("departureTime");
+        $arrivalTime = $request->input("arrivalTime");
+        $adultsNumber = Session::get('adultsNumber');
+        $childrenNumber = Session::get('childrenNumber');
+
+        $routeQuery = Routes::query();
+        $route = $routeQuery
+            ->where("departure_station", $departureStation)
+            ->where("arrival_station", $arrivalStation)
+            ->where("day_of_week", $dayOfWeek)
+            ->where("departure_time", $departureTime)
+            ->where("arrival_time", $arrivalTime)
+            ->get();
+        return view('train.result-fare', compact("route", "adultsNumber", "childrenNumber"));
     }
 }

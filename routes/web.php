@@ -35,3 +35,5 @@ Route::resource('/train', SearchTrainController::class);
 
 Route::post('train/result', [TrainResultController::class, 'trainResult'])->name('trainResult');
 Route::post('train/result-fare', [TrainResultController::class, 'trainResultFare'])->name('trainResultFare');
+
+Route::post('train/seating-chart');
