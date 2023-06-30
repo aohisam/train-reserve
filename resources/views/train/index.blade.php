@@ -21,7 +21,7 @@
     @include('layouts.dashboard-link')
 
     <div class="search-train">
-        <form action="" method="post">
+        <form action="/train/result" method="post">
             @csrf
             <div class="select-date-area">
                 <select name="01" class="select-date">
@@ -37,8 +37,8 @@
                     {{-- javascriptで分の optionタグを作成 --}}
                 </select>
                 <select name="04" class="leave-or-arrival">
-                    <option value="1" selected>出発</option>
-                    <option value="2">到着</option>
+                    <option value="leave" selected>出発</option>
+                    <option value="arrival">到着</option>
                 </select>
             </div>
 

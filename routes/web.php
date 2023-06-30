@@ -4,6 +4,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SearchTrainController;
+use App\Http\Controllers\TrainResultController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +32,6 @@ Route::resource('users/register', RegisterController::class);
 Route::get('users/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('/train', SearchTrainController::class);
+
+Route::post('train/result', [TrainResultController::class, 'trainResult'])->name('trainResult');
+Route::post('train/result-fare', [TrainResultController::class, 'trainResultFare'])->name('trainResultFare');
