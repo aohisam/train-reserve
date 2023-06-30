@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\RouteController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SearchTrainController;
+use App\Http\Controllers\TrainResultController;
 use Illuminate\Support\Facades\Route;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +18,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/users', function () {
+    return view('users.index');
 });
+Route::post('/users', [RegisterController::class, 'store']);
 
-//運行情報作成用の下記コードは、運行情報作成に伴い下記コメントアウト
-// Route::get('/add-routes', [RouteController::class, 'addRoutes']);
+Route::post('/users', [LoginController::class, 'store']);
+Route::resource('users/login', LoginController::class);
+Route::post('users/logout', [LoginController::class, 'logout'])->name('logout');
 
+Route::resource('users/register', RegisterController::class);
 
+Route::get('users/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::resource('/train', SearchTrainController::class);
+
+Route::post('train/result', [TrainResultController::class, 'trainResult'])->name('trainResult');
+Route::post('train/result-fare', [TrainResultController::class, 'trainResultFare'])->name('trainResultFare');
+
+Route::post('train/seating-chart');
