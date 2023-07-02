@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('seat_reservations', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('train_id');
             $table->foreign('train_id')->references('id')->on('routes');
+            $table->unsignedBigInteger('seating_chart_id');
+            $table->foreign('seating_chart_id')->references('id')->on('seating-charts');
             $table->boolean('reserved');
             $table->timestamps();
         });

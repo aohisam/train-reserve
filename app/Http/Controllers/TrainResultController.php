@@ -67,6 +67,7 @@ class TrainResultController extends Controller
             ->where("departure_time", $departureTime)
             ->where("arrival_time", $arrivalTime)
             ->get();
+        Session::put("train", $route);
         return view('train.result-fare', compact("route", "adultsNumber", "childrenNumber"));
     }
 }
